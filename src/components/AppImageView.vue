@@ -28,7 +28,4 @@ img {
   aspect-ratio: 1 / 1;
   width: 256px;
 }
-.card {
-  width: 256px;
-}
 </style>

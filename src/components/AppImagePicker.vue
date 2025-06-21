@@ -65,15 +65,4 @@ img {
   background: white;
   border: 1px solid #ddd;
 }
-.app-btn-primary {
-  background-color: #3674B5;
-  color: white;
-  font-weight: 510;
-  width: 256px;
-  text-align: center;
-}
-
-.app-btn-primary:hover {
-  opacity: 0.8;
-}
 </style>
