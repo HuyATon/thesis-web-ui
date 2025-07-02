@@ -5,7 +5,7 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
 </script>
 
 <template>
-  <div class="container-fluid vh-100 p-0">
+  <div class="container-fluid p-0">
     <div class="container py-3">
       <div class="text-center">
         <h1>Image Inpainting</h1>
@@ -17,7 +17,7 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
           mask (256x256 image size is preferred).
         </p>
         <p class="text-secondary">
-          🔎 Visit the <a href="#" class="link-success">benchmark </a> of
+          🔎 Visit the <a href="/benchmark" class="link-primary"> benchmark </a> of
           Continously Transformer Mamba (proposed) on CelebA-HQ.
         </p>
       </div>

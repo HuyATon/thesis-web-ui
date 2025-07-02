@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-    <div v-if="isLoading" class="position-absolute w-100 h-100 spinner-overlay d-flex justify-content-center align-items-center">
+    <div v-if="isLoading" class="position-fixed h-100 w-100 spinner-overlay d-flex justify-content-center align-items-center">
       <div class="loading-container bg-light w-25 py-5 d-flex flex-column align-items-center px-5 rounded">
         <div class="spinner-border" role="status"/>
         <span class="mt-2">Processing...</span>

@@ -5,17 +5,17 @@ import AppHomePage from './views/AppHomePage.vue'
 </script>
 
 <template>
-    <!-- <AppHomePage/> -->
-    <div id="main" class="container-fluid">
-        <AppHomePage/>
+    <div id="app">
+      <router-view />
     </div>
 </template>
 
 <style>
-#main {
+#app {
   font-family: 'Ubuntu';
   background-color: #F7F7F7;
   padding: 0;
+  min-height: 100vh;
 }
 
 .app-btn-primary {
