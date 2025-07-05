@@ -6,12 +6,14 @@ import AppImageView from "../components/AppImageView.vue";
 import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
 
 // REPLACE THIS Flask endpoint
-const backendUrl = 'https://309c-34-125-150-129.ngrok-free.app/inpaint'
+const backendUrl = 'https://3a74-34-125-150-129.ngrok-free.app/inpaint'
 
 const imageFile = ref(null)
 const maskFile = ref(null)
-const resultImageUrl = ref(null)
 const isLoading = ref(false)
+
+const cmtImage = ref(null)
+const mambaImage = ref(null)
 
 function onImageSelect(file) {
   imageFile.value = file
@@ -41,7 +43,12 @@ async function submitToBackend() {
     mambaImage.value = `data:image/png;base64,${response.data.mamba}`
   } catch (error) {
     alert("Error contacting backend")
-    console.error(error)
+    console.error("Backend error:", error)
+    if (error.response) {
+      console.error("Response data:", error.response.data)
+      console.error("Status:", error.response.status)
+      console.error("Headers:", error.response.headers)
+    }
   } finally {
     isLoading.value = false
   }
@@ -73,7 +80,7 @@ async function submitToBackend() {
               placeholderImage="https://icons.veryicon.com/png/o/education-technology/power-icon/face-recognition-1.png" />
           </div>
           <div class="row">
-            <AppImagePicker buttonTitle="Choose Mask"  @selected="onMaskSelect" class="mt-3"
+            <AppImagePicker buttonTitle="Choose Mask" @selected="onMaskSelect" class="mt-3"
               placeholderImage="https://icons.veryicon.com/png/o/application/designe-editing/layer-13.png" />
           </div>
         </div>
@@ -84,7 +91,8 @@ async function submitToBackend() {
             <AppImageView caption="Proposed" :src="mambaImage"/>
           </div>
           <div class="w-100 mt-3 text-center">
-            <button class="app-btn-primary mt-2 p-2 rounded border-0" @click="submitToBackend" :disabled="isLoading" style="cursor: pointer">
+            <button class="app-btn-primary mt-2 p-2 rounded border-0" @click="submitToBackend" :disabled="isLoading"
+              style="cursor: pointer">
               Process
             </button>
           </div>
