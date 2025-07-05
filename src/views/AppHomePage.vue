@@ -23,34 +23,6 @@ function onMaskSelect(file) {
   console.log("Selected mask:", file)
 }
 
-// async function submitToBackend() {
-//   console.log("Submitting:", imageFile.value, maskFile.value)
-
-//   if (!imageFile.value || !maskFile.value) {
-//     alert("Please select both an image and a mask.")
-//     return
-//   }
-
-//   isLoading.value = true
-
-//   const formData = new FormData()
-//   formData.append('image', imageFile.value)
-//   formData.append('mask', maskFile.value)
-
-//   try {
-//     const response = await axios.post(backendUrl, formData, {
-//       responseType: 'blob',
-//     })
-//     const blob = new Blob([response.data], { type: 'image/png' })
-//     resultImageUrl.value = URL.createObjectURL(blob)
-//   } catch (error) {
-//     alert("Error contacting backend")
-//     console.error(error)
-//   } finally {
-//     isLoading.value = false
-//   }
-// }
-
 async function submitToBackend() {
   if (!imageFile.value || !maskFile.value) {
     alert("Please select both an image and a mask.")
@@ -109,7 +81,7 @@ async function submitToBackend() {
         <div class="col d-flex flex-column justify-content-center">
           <div class="d-flex justify-content-between align-items-center">
             <AppImageView caption="Baseline" :src="cmtImage" />
-            <AppImageView caption="Proposed" />
+            <AppImageView caption="Proposed" :src="mambaImage"/>
           </div>
           <div class="w-100 mt-3 text-center">
             <button class="app-btn-primary mt-2 p-2 rounded border-0" @click="submitToBackend" :disabled="isLoading" style="cursor: pointer">

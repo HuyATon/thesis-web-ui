@@ -51,38 +51,6 @@ function onFileChange(event) {
 }
 </script>
 
-<!-- <script>
-export default {
-  name: "AppImagePicker",
-  props: {
-    placeholderImage: {
-      type: String,
-      default: "",
-    },
-    buttonTitle: {
-      type: String,
-      default: "Choose Image"
-    }
-  },
-  data() {
-    return {
-      imageUrl: null,
-      inputId: "image-picker-" + Math.random().toString(36).substr(2, 9),
-    };
-  },
-  methods: {
-    onFileChange(event) {
-      const file = event.target.files[0];
-      if (file && file.type.startsWith("image/")) {
-        this.imageUrl = URL.createObjectURL(file);
-      } else {
-        this.imageUrl = null;
-      }
-    },
-  },
-};
-</script> -->
-
 <style scoped>
 img {
   aspect-ratio: 1 / 1;
