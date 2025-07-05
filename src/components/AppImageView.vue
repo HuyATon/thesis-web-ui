@@ -2,7 +2,7 @@
   <div class="card">
     <img
       class="card-img-top"
-      src="https://placehold.co/256"
+      :src="src || 'https://placehold.co/256'"
       alt="Card image cap"
     >
     <div class="card-body">
@@ -16,6 +16,10 @@ export default {
   name: "AppImageView",
   props: {
     caption: {
+      type: String,
+      default: ""
+    },
+    src: {
       type: String,
       default: ""
     }

@@ -1,4 +1,6 @@
 <script setup>
+import axios from "axios";
+import { ref } from "vue";
 import AppImagePicker from "../components/AppImagePicker.vue";
 import AppImageView from "../components/AppImageView.vue";
 import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
@@ -43,8 +45,8 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
 
         <div class="col d-flex flex-column justify-content-center">
           <div class="d-flex justify-content-between align-items-center">
-            <AppImageView caption="Baseline" />
-            <AppImageView caption="Proposed" />
+            <AppImageView caption="Baseline" :src="this.baseline" />
+            <AppImageView caption="Proposed" :src="this.proposed" />
           </div>
           <div class="w-100 mt-3 text-center">
             <button
@@ -75,6 +77,9 @@ export default {
       isLoading: false,
       gt: null,
       mask: null,
+      baseline: null,
+      proposed: null,
+      endpoint: 'https://05b4-34-125-164-154.ngrok-free.app/inpaint',
     };
   },
   computed: {
@@ -84,6 +89,7 @@ export default {
   },
   methods: {
     handleImagePicked(file, pickType) {
+      console.log("Image picked:", file, pickType);
       if (!file) { return }
       if (pickType === "image") {
         this.gt = file;
@@ -91,8 +97,24 @@ export default {
         this.mask = file;
       }
     },
-    handleSubmit() {
+    async handleSubmit() {
       this.isLoading = true
+      const formData = new FormData()
+      formData.append('image', this.gt)
+      formData.append('mask', this.mask)
+      console.log([...formData.entries()])
+      console.log(this.gt)
+      try {
+        const response = await axios.post(this.endpoint, formData)
+        this.proposed = `data:image/png;base64,${response.data.mamba}`
+        this.baseline = `data:image/png;base64,${response.data.cmt}`
+      }
+      catch (error) {
+        alert("Something went wrong. Please try again.")
+      }
+      finally {
+        this.isLoading = false
+      }
     },
   },
 };
