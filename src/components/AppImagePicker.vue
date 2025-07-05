@@ -26,7 +26,32 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref } from 'vue'
+
+const props = defineProps({
+  placeholderImage: String,
+  buttonTitle: {
+    type: String,
+    default: 'Choose Image',
+  },
+})
+
+const emit = defineEmits(['selected'])
+const imageUrl = ref(null)
+
+function onFileChange(event) {
+  const file = event.target.files[0]
+  if (file && file.type.startsWith('image/')) {
+    imageUrl.value = URL.createObjectURL(file)
+    emit('selected', file)
+  } else {
+    emit('selected', null)
+  }
+}
+</script>
+
+<!-- <script>
 export default {
   name: "AppImagePicker",
   props: {
@@ -56,7 +81,7 @@ export default {
     },
   },
 };
-</script>
+</script> -->
 
 <style scoped>
 img {

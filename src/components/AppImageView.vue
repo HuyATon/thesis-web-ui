@@ -2,8 +2,8 @@
   <div class="card">
     <img
       class="card-img-top"
-      src="https://placehold.co/256"
-      alt="Card image cap"
+      :src="src || 'https://placehold.co/256'"
+      alt="Card image"
     >
     <div class="card-body">
       <p class="card-text text-center">{{ caption }}</p>
@@ -18,6 +18,10 @@ export default {
     caption: {
       type: String,
       default: ""
+    },
+    src: {
+      type: String,
+      default: "" 
     }
   }
 };
@@ -27,5 +31,6 @@ export default {
 img {
   aspect-ratio: 1 / 1;
   width: 256px;
+  object-fit: cover;
 }
 </style>
