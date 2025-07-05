@@ -5,6 +5,11 @@ const images = [
     url,
     url
 ]
+const samples = import.meta.glob('@/assets/samples/*.png', {
+  eager: true,
+  import: 'default'
+})
+
 </script>
 
 <template>
@@ -14,23 +19,23 @@ const images = [
       <p class="mb-3">Comparision between the proposed and common inpainting models</p>
     
       <h5>Sample from proposed</h5>
-      <p>Sample images from proposed testing dataset.</p>
+      <p>100 samples from proposed testing dataset.</p>
       <div class="d-flex flex-column align-items-center p-3 sample-container">
-        <div v-for="(img, idx) in images"
+        <div v-for="(img, idx) in samples"
             :key="idx"
         >
             <div class="d-flex justify-content-around w-100 mt-3 mb-1">
                 <div class="text-center">
-                    GT
+                    Masked
                 </div>
                  <div class="text-center">
-                    Masked
+                    GT
                 </div>
                  <div class="text-center">
                     Proposed
                 </div>
             </div>
-            <img :src="img" class="mb-3" alt="">
+            <img :src="img" class="" alt="">
             <hr v-if="idx !== images.length - 1" class="rounded">
         </div>
       </div>
@@ -41,6 +46,10 @@ const images = [
 <style scoped>
 .sample-container {
   width: 800px;
+}
+
+img {
+  width: 384px;
 }
 </style>
 

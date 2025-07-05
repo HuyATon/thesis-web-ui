@@ -11,12 +11,12 @@
 
     <label
       class="app-btn-primary mt-2 p-2 rounded"
-      :for="inputId"
+      :for="pickType"
       style="cursor: pointer"
     >
       {{buttonTitle}}
       <input
-        :id="inputId"
+        :id="pickType"
         type="file"
         class="d-none"
         accept="image/*"
@@ -27,8 +27,13 @@
 </template>
 
 <script>
+  const PickType = {
+    IMAGE: 'image',
+    MASK: 'mask'
+  }
 export default {
   name: "AppImagePicker",
+  emits: ['picked'],
   props: {
     placeholderImage: {
       type: String,
@@ -37,21 +42,26 @@ export default {
     buttonTitle: {
       type: String,
       default: "Choose Image"
+    },
+    pickType: {
+      type: String,
+      default: PickType.IMAGE
     }
   },
   data() {
     return {
-      imageUrl: null,
-      inputId: "image-picker-" + Math.random().toString(36).substr(2, 9),
+      imageUrl: null
     };
   },
   methods: {
     onFileChange(event) {
       const file = event.target.files[0];
       if (file && file.type.startsWith("image/")) {
-        this.imageUrl = URL.createObjectURL(file);
+        this.imageUrl = URL.createObjectURL(file)
+        this.$emit('picked', file, this.pickType)
       } else {
         this.imageUrl = null;
+        this.$emit('picked', null)
       }
     },
   },

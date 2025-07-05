@@ -12,7 +12,7 @@ export default {
 
 <template>
     <div v-if="isLoading" class="position-fixed h-100 w-100 spinner-overlay d-flex justify-content-center align-items-center">
-      <div class="loading-container bg-light w-25 py-5 d-flex flex-column align-items-center px-5 rounded">
+      <div class="loading-container bg-light py-5 d-flex flex-column align-items-center px-5 rounded">
         <div class="spinner-border" role="status"/>
         <span class="mt-2">Processing...</span>
       </div>
@@ -30,5 +30,8 @@ export default {
 .spinner-border {
     /* color: F5F0CD; */
 }
-
+.loading-container {
+  width: 220px;
+  height: 160px;
+}
 </style>

@@ -17,7 +17,8 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
           mask (256x256 image size is preferred).
         </p>
         <p class="text-secondary">
-          🔎 Visit the <a href="/benchmark" class="link-primary"> benchmark </a> of
+          🔎 Visit the
+          <a href="/benchmark" class="link-primary"> benchmark </a> of
           Continously Transformer Mamba (proposed) on CelebA-HQ.
         </p>
       </div>
@@ -26,13 +27,16 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
           <div class="row">
             <AppImagePicker
               placeholderImage="https://icons.veryicon.com/png/o/education-technology/power-icon/face-recognition-1.png"
+              @picked="handleImagePicked"
             />
           </div>
           <div class="row">
             <AppImagePicker
+              pickType="mask"
               buttonTitle="Choose Mask"
               class="mt-3"
               placeholderImage="https://icons.veryicon.com/png/o/application/designe-editing/layer-13.png"
+              @picked="handleImagePicked"
             />
           </div>
         </div>
@@ -44,8 +48,13 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
           </div>
           <div class="w-100 mt-3 text-center">
             <button
-              class="app-btn-primary mt-2 p-2 rounded border-0"
+              class=" mt-2 p-2 rounded border-0"
+              :class="{ 'app-btn-primary' : this.isEnabled,
+                        'app-disabled-btn' : !this.isEnabled,
+              }"
+              :disabled="!this.isEnabled"
               style="cursor: pointer"
+              @click="handleSubmit"
             >
               Process
             </button>
@@ -64,7 +73,27 @@ export default {
   data() {
     return {
       isLoading: false,
+      gt: null,
+      mask: null,
     };
+  },
+  computed: {
+    isEnabled() {
+      return this.mask !== null && this.gt !== null;
+    }
+  },
+  methods: {
+    handleImagePicked(file, pickType) {
+      if (!file) { return }
+      if (pickType === "image") {
+        this.gt = file;
+      } else {
+        this.mask = file;
+      }
+    },
+    handleSubmit() {
+      this.isLoading = true
+    },
   },
 };
 </script>
