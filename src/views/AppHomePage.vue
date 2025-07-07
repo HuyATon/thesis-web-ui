@@ -7,25 +7,26 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
 </script>
 
 <template>
-  <div class="container-fluid p-0">
+  <div class="container-fluid">
     <div class="container py-3">
       <div class="text-center">
-       <div class="app-container mb-4">
-         <h2>Image Inpainting</h2>
-        <h5 class="mb-3">
-          Demonstration of image inpainting follows Transformer-based approach.
-        </h5>
-        <p class="mb-2">
-          Provide a tuple of image: an image of human face & an according
-          mask (256x256 image size is preferred).
-        </p>
-        <p class="text-secondary">
-          Visit the
-          <a href="/benchmark" class="link-primary"> benchmark </a> of
-          Continously Transformer Mamba (proposed) on CelebA-HQ.
-        </p>
+        <div class="app-container mb-4">
+          <h2>Image Inpainting</h2>
+          <h5 class="mb-3">
+            Demonstration of image inpainting follows Transformer-based
+            approach.
+          </h5>
+          <p class="mb-2">
+            Provide a tuple of image: an image of human face & an according mask
+            (256x256 image size is preferred).
+          </p>
+          <p class="text-secondary">
+            Visit the
+            <a href="/benchmark" class="link-primary"> benchmark </a> of
+            Continously Transformer Mamba (proposed) on CelebA-HQ.
+          </p>
+        </div>
       </div>
-       </div>
       <div class="row justify-content-center">
         <div class="col">
           <div class="row">
@@ -46,15 +47,16 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
         </div>
 
         <div class="col d-flex flex-column justify-content-center">
-          <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-around align-items-center">
             <AppImageView caption="Baseline" :src="this.baseline" />
             <AppImageView caption="Proposed" :src="this.proposed" />
           </div>
           <div class="w-100 mt-3 text-center">
             <button
-              class=" mt-2 p-2 rounded border-0"
-              :class="{ 'app-btn-primary' : this.isEnabled,
-                        'app-disabled-btn' : !this.isEnabled,
+              class="mt-2 p-2 rounded border-0"
+              :class="{
+                'app-btn-primary': this.isEnabled,
+                'app-disabled-btn': !this.isEnabled,
               }"
               :disabled="!this.isEnabled"
               style="cursor: pointer"
@@ -81,18 +83,20 @@ export default {
       mask: null,
       baseline: null,
       proposed: null,
-      endpoint: 'https://05b4-34-125-164-154.ngrok-free.app/inpaint',
+      endpoint: "https://05b4-34-125-164-154.ngrok-free.app/inpaint",
     };
   },
   computed: {
     isEnabled() {
       return this.mask !== null && this.gt !== null;
-    }
+    },
   },
   methods: {
     handleImagePicked(file, pickType) {
       console.log("Image picked:", file, pickType);
-      if (!file) { return }
+      if (!file) {
+        return;
+      }
       if (pickType === "image") {
         this.gt = file;
       } else {
@@ -100,22 +104,20 @@ export default {
       }
     },
     async handleSubmit() {
-      this.isLoading = true
-      const formData = new FormData()
-      formData.append('image', this.gt)
-      formData.append('mask', this.mask)
-      console.log([...formData.entries()])
-      console.log(this.gt)
+      this.isLoading = true;
+      const formData = new FormData();
+      formData.append("image", this.gt);
+      formData.append("mask", this.mask);
+      console.log([...formData.entries()]);
+      console.log(this.gt);
       try {
-        const response = await axios.post(this.endpoint, formData)
-        this.proposed = `data:image/png;base64,${response.data.mamba}`
-        this.baseline = `data:image/png;base64,${response.data.cmt}`
-      }
-      catch (error) {
-        alert("Something went wrong. Please try again.")
-      }
-      finally {
-        this.isLoading = false
+        const response = await axios.post(this.endpoint, formData);
+        this.proposed = `data:image/png;base64,${response.data.mamba}`;
+        this.baseline = `data:image/png;base64,${response.data.cmt}`;
+      } catch (error) {
+        alert("Something went wrong. Please try again.");
+      } finally {
+        this.isLoading = false;
       }
     },
   },

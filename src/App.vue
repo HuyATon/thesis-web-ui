@@ -10,14 +10,14 @@ import AppHomePage from "./views/AppHomePage.vue";
 
 <style>
 #app {
-  font-family: "Rubik", "Ubuntu";
-  background-color: #f7f7f7;
+  font-family: "Ubuntu", "Rubik";
+  background-color: #F1EFEC;
   padding: 0;
   min-height: 100vh;
 }
 
 .app-btn-primary {
-  background-color: #3674b5;
+  background-color: #447D9B;
   color: white;
   font-weight: 510;
   width: 256px;
@@ -25,7 +25,7 @@ import AppHomePage from "./views/AppHomePage.vue";
 }
 
 .app-disabled-btn {
-  background-color: #3674b5;
+  background-color: #447D9B;
   color: white;
   font-weight: 400;
   width: 256px;
@@ -43,7 +43,8 @@ import AppHomePage from "./views/AppHomePage.vue";
   flex-direction: column;
   align-items: center;
   border-radius: 16px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 16px;
+  border: 1px solid #ddd;
 }
 </style>

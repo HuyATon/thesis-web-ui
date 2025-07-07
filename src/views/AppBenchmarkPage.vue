@@ -20,12 +20,12 @@ const score = benchmarkImage
     <div class="container d-flex flex-column align-items-center py-3">
       <div class="app-container">
         <h2 class="mb-3">Benchmark</h2>
-        <p class="mb-3">Comparision between the proposed and common inpainting models</p>
+        <p class="mb-3">Benchmark of the baseline, the proposed and common inpainting models.</p>
         <img :src="score" class="img-score w-75 mb-5"  alt="Benchmark Score">
       </div>
       <div class="app-container w-100 mt-4">
-         <h2>Sample Images </h2>
-        <p>100 samples from proposed testing dataset.</p>
+         <h2 class="mb-3">Sample Images </h2>
+        <p>100 samples from CelebA-HQ testing dataset that processed by the proposed model.</p>
       <div class="d-flex flex-column align-items-center p-3 sample-container">
         <div v-for="(img, idx) in samples"
             :key="idx"
