@@ -10,20 +10,22 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
   <div class="container-fluid p-0">
     <div class="container py-3">
       <div class="text-center">
-        <h1>Image Inpainting</h1>
+       <div class="app-container mb-4">
+         <h2>Image Inpainting</h2>
         <h5 class="mb-3">
           Demonstration of image inpainting follows Transformer-based approach.
         </h5>
         <p class="mb-2">
-          📚 Provide a tuple of image: an image of human face & an according
+          Provide a tuple of image: an image of human face & an according
           mask (256x256 image size is preferred).
         </p>
         <p class="text-secondary">
-          🔎 Visit the
+          Visit the
           <a href="/benchmark" class="link-primary"> benchmark </a> of
           Continously Transformer Mamba (proposed) on CelebA-HQ.
         </p>
       </div>
+       </div>
       <div class="row justify-content-center">
         <div class="col">
           <div class="row">

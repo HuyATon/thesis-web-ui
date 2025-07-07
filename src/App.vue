@@ -10,7 +10,7 @@ import AppHomePage from "./views/AppHomePage.vue";
 
 <style>
 #app {
-  font-family: "Ubuntu";
+  font-family: "Rubik", "Ubuntu";
   background-color: #f7f7f7;
   padding: 0;
   min-height: 100vh;
@@ -35,5 +35,15 @@ import AppHomePage from "./views/AppHomePage.vue";
 
 .app-btn-primary:hover {
   opacity: 0.8;
+}
+
+.app-container {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
 }
 </style>
