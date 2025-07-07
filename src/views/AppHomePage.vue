@@ -4,6 +4,7 @@ import { ref } from "vue";
 import AppImagePicker from "../components/AppImagePicker.vue";
 import AppImageView from "../components/AppImageView.vue";
 import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
+import AppMaskEditor from "../components/AppMaskEditor.vue";
 </script>
 
 <template>
@@ -28,22 +29,52 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col">
-          <div class="row">
-            <AppImagePicker
-              placeholderImage="https://icons.veryicon.com/png/o/education-technology/power-icon/face-recognition-1.png"
-              @picked="handleImagePicked"
-            />
+        <div class="col position-relative">
+          <div class="position-absolute top-0 start-50 app-container-base">
+            <h6 class="w-100 text-center">Settings</h6>
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                role="switch"
+                v-model="isDrawing"
+              />
+              <label class="form-check-label ms-2"> Draw mask </label>
+            </div>
+            <div v-if="isDrawing">
+              <label for="customRange2" class="form-label">Brush size</label>
+              <div class="d-flex">
+                <span>1</span>
+                <input
+                  v-model="brushSize"
+                  type="range"
+                  class="form-range"
+                  min="1"
+                  max="25"
+                  id="customRange2"
+                />
+                <span>25</span>
+              </div>
+            </div>
           </div>
-          <div class="row">
-            <AppImagePicker
-              pickType="mask"
-              buttonTitle="Choose Mask"
-              class="mt-3"
-              placeholderImage="https://icons.veryicon.com/png/o/application/designe-editing/layer-13.png"
-              @picked="handleImagePicked"
-            />
-          </div>
+          <AppImagePicker
+            placeholderImage="https://icons.veryicon.com/png/o/education-technology/power-icon/face-recognition-1.png"
+            @picked="handleImagePicked"
+          />
+          <AppMaskEditor
+            v-if="isDrawing"
+            :imageSrc="this.gtUrl"
+            :brushSize="this.brushSize"
+            @mask-exported="handleMaskDrawn"
+          />
+          <AppImagePicker
+            v-else
+            pickType="mask"
+            buttonTitle="Choose Mask"
+            class="mt-3"
+            placeholderImage="https://icons.veryicon.com/png/o/application/designe-editing/layer-13.png"
+            @picked="handleImagePicked"
+          />
         </div>
 
         <div class="col d-flex flex-column justify-content-center">
@@ -53,7 +84,7 @@ import AppLoadingOverlay from "../components/AppLoadingOverlay.vue";
           </div>
           <div class="w-100 mt-3 text-center">
             <button
-              class="mt-2 p-2 rounded border-0"
+              class="mt-2 p-2 app-rounded border-0"
               :class="{
                 'app-btn-primary': this.isEnabled,
                 'app-disabled-btn': !this.isEnabled,
@@ -79,16 +110,23 @@ export default {
   data() {
     return {
       isLoading: false,
+      isDrawing: true,
       gt: null,
       mask: null,
       baseline: null,
       proposed: null,
-      endpoint: "https://05b4-34-125-164-154.ngrok-free.app/inpaint",
+      brushSize: 10,
+      endpoint: "https://1815-34-127-52-102.ngrok-free.app/inpaint",
     };
   },
   computed: {
     isEnabled() {
       return this.mask !== null && this.gt !== null;
+    },
+    gtUrl() {
+      if (this.gt instanceof File) {
+        return URL.createObjectURL(this.gt);
+      }
     },
   },
   methods: {
@@ -119,6 +157,9 @@ export default {
       } finally {
         this.isLoading = false;
       }
+    },
+    handleMaskDrawn(mask) {
+      this.mask = mask;
     },
   },
 };

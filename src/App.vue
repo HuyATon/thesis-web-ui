@@ -47,4 +47,18 @@ import AppHomePage from "./views/AppHomePage.vue";
   padding: 16px;
   border: 1px solid #ddd;
 }
+
+.app-container-base {
+  background-color: #F8F8F8;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  border: 1px solid #ddd;
+}
+.app-rounded {
+  border-radius: 16px;
+}
 </style>

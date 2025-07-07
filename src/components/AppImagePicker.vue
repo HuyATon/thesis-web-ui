@@ -4,13 +4,13 @@
       <img
         :src="imageUrl || placeholderImage"
         alt="Preview"
-        class="img-fluid rounded shadow"
+        class="img-fluid app-rounded shadow"
         style="max-width: 400px"
       />
     </div>
 
     <label
-      class="app-btn-primary mt-2 p-2 rounded"
+      class="app-btn-primary mt-2 p-2 app-rounded"
       :for="pickType"
       style="cursor: pointer"
     >
@@ -72,7 +72,7 @@ export default {
 img {
   aspect-ratio: 1 / 1;
   width: 256px;
-  background: white;
+  background: #F8F8F8;
   border: 1px solid #ddd;
 }
 </style>

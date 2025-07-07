@@ -42,7 +42,7 @@ const score = benchmarkImage
                 </div>
             </div>
             <img :src="img" class="comparision" alt="">
-            <hr v-if="idx !== images.length - 1" class="rounded">
+            <hr v-if="idx !== images.length - 1" class="app-rounded">
         </div>
       </div>
       </div>
