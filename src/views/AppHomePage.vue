@@ -63,6 +63,7 @@ import AppMaskEditor from "../components/AppMaskEditor.vue";
                 <div class="fs-6 font-monospace ms-2" >25</div>
               </div>
             </div>
+             <small v-if="isDrawing && isEnabled" @click="exportMask"  class="text-primary" style="cursor: pointer;">Export Mark</small>
           </div>
           <AppImagePicker
             placeholderImage="https://icons.veryicon.com/png/o/education-technology/power-icon/face-recognition-1.png"
@@ -167,6 +168,31 @@ export default {
     },
     handleMaskDrawn(mask) {
       this.mask = mask;
+    },
+    exportMask() {
+      if (!this.mask) return;
+      let maskData = this.mask;
+      // If mask is a File or Blob, create a URL and download
+      if (maskData instanceof Blob || maskData instanceof File) {
+        const url = URL.createObjectURL(maskData);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mask.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      } else if (typeof maskData === 'string' && maskData.startsWith('data:image')) {
+        // If mask is a data URL
+        const a = document.createElement('a');
+        a.href = maskData;
+        a.download = 'mask.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        alert('Mask format not supported for export.');
+      }
     },
   },
 };
