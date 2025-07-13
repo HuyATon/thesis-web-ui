@@ -49,7 +49,7 @@ import AppHomePage from "./views/AppHomePage.vue";
 }
 
 .app-container-base {
-  background-color: #F8F8F8;
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

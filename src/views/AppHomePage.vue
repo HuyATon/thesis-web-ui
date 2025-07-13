@@ -24,36 +24,43 @@ import AppMaskEditor from "../components/AppMaskEditor.vue";
           <p class="text-secondary">
             Visit the
             <a href="/benchmark" class="link-primary"> benchmark </a> of
-            Continously Transformer Mamba (proposed) on CelebA-HQ.
+            Hybrid Mamba Transformer (proposed) on CelebA-HQ.
           </p>
         </div>
       </div>
       <div class="row justify-content-center">
         <div class="col position-relative">
-          <div class="position-absolute top-0 start-50 app-container-base">
-            <h6 class="w-100 text-center">Settings</h6>
-            <div class="form-check form-switch">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                role="switch"
-                v-model="isDrawing"
-              />
-              <label class="form-check-label ms-2"> Draw mask </label>
-            </div>
-            <div v-if="isDrawing">
-              <label for="customRange2" class="form-label">Brush size</label>
-              <div class="d-flex">
-                <span>1</span>
+          <div class="position-absolute top-0 start-50 app-container-base" style="width: 250px;">
+            <h6 class="w-100 text-center">Setting</h6>
+            <div class="d-flex justify-content-between w-100">
+              <div class="me-2">
+                Draw Mask:
+              </div>
+              <div class="form-check form-switch">
                 <input
+                  class="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  v-model="isDrawing"
+                />
+            </div>
+            </div>
+            <div v-if="isDrawing" class="d-flex justify-content-between w-100">
+              <label for="customRange2" class="form-label">Brush Size:</label>
+              <div class="d-flex justify-content-between">
+                <div class="fs-6 font-monospace me-2" >1</div>
+                <div>
+                  <input
                   v-model="brushSize"
                   type="range"
                   class="form-range"
                   min="1"
                   max="25"
                   id="customRange2"
+                  style="width: 70px;"
                 />
-                <span>25</span>
+                </div>
+                <div class="fs-6 font-monospace ms-2" >25</div>
               </div>
             </div>
           </div>
